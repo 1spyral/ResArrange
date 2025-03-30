@@ -6,7 +6,13 @@ import App from "./App.vue"
 import { library } from "@fortawesome/fontawesome-svg-core"
 import { faFileLines, faGear, faList, faScrewdriverWrench } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome"
+import * as pdfjs from "pdfjs-dist"
+import pdfWorker from "pdfjs-dist/build/pdf.worker.min.mjs?url"
 
+// Set up pdfjs
+pdfjs.GlobalWorkerOptions.workerSrc = pdfWorker
+
+// Set up fontawesome
 library.add(faScrewdriverWrench)
 library.add(faList)
 library.add(faFileLines)

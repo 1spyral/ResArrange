@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import SideBar from "@/components/SideBar.vue"
 import Editor from "@/components/Editor.vue"
-import PDFRenderer from "@/components/PDFRenderer.vue"
+import PDFViewer from "@/components/PDFViewer.vue"
 </script>
 
 <template>
   <div class="main">
     <SideBar />
     <Editor />
-    <PDFRenderer />
+    <PDFViewer />
   </div>
 </template>
 
