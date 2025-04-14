@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import type { PDFPageProxy } from "pdfjs-dist"
 import { onMounted, ref } from "vue"
 import { usePDFStore } from "@/stores/pdf.ts"
 
@@ -13,6 +12,9 @@ const pdfStore = usePDFStore()
 
 onMounted(async () => {
   const page = await pdfStore.getPage(pageNum)
+  if (!page) {
+    return
+  }
   const canvas = canvasRef.value!
   const context = canvas.getContext("2d") as CanvasRenderingContext2D
   // Get viewport at full scale
