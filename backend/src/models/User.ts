@@ -1,20 +1,26 @@
-import { IEducation } from "@/models/Education"
-import { IExperience } from "@/models/Experience"
-import { IProject } from "@/models/Project"
-import { ISkill } from "@/models/Skill"
+import mongoose, { Schema, Document } from "mongoose"
+import { IUser } from "@/interfaces/User"
+import { educationSchema } from "@/models/Education"
+import { experienceSchema } from "@/models/Experience"
+import { projectSchema } from "@/models/Project"
+import { skillSchema } from "@/models/Skill"
 
-export interface IUser {
-    name: string
+export interface UserDocument extends IUser, Document {}
 
-    phone?: string
-    email?: string
-    linkedin?: string
-    github?: string
-    website?: string
-    location?: string
+const userSchema = new Schema({
+    name: { type: String, required: true },
 
-    education: IEducation[]
-    experience: IExperience[]
-    projects: IProject[]
-    skills: ISkill[],
-}
+    phone: { type: String },
+    email: { type: String },
+    linkedin: { type: String },
+    github: { type: String },
+    website: { type: String },
+    location: { type: String },
+
+    education: { type: [educationSchema], required: true },
+    experience: { type: [experienceSchema], required: true },
+    projects: { type: [projectSchema], required: true },
+    skills: { type: [skillSchema], required: true }
+})
+
+export const UserModel = mongoose.model<UserDocument>("User", userSchema)

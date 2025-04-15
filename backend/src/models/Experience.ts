@@ -1,15 +1,19 @@
-import { ISkill } from "@/models/Skill"
+import { Schema, Document } from "mongoose"
+import { IExperience } from "@/interfaces/Experience"
+import { skillSchema } from "@/models/Skill"
 
-export interface IExperience {
-    company: string
-    title: string
-    location: string
+export interface ExperienceDocument extends IExperience, Document {}
 
-    startDate: Date
-    endDate?: Date
+export const experienceSchema = new Schema({
+    company: { type: String, required: true },
+    position: { type: String, required: true },
+    location: { type: String, required: true },
 
-    description?: string
-    points: string[]
+    startDate: { type: Date, required: true },
+    endDate: { type: Date },
 
-    skills?: ISkill[]
-}
+    description: { type: String },
+    points: { type: [String] },
+
+    skills: { type: [skillSchema] }
+})

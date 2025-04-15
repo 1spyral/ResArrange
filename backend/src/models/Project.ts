@@ -1,16 +1,20 @@
-import { ISkill } from "@/models/Skill"
+import { Schema, Document } from "mongoose";
+import { IProject } from "@/interfaces/Project";
+import { skillSchema } from "@/models/Skill";
 
-export interface IProject {
-    title: string
+export interface ProjectDocument extends IProject, Document {}
 
-    startDate: Date
-    endDate?: Date
+export const projectSchema = new Schema({
+    title: { type: String, required: true },
 
-    description?: string
-    points: string[]
+    startDate: { type: Date, required: true },
+    endDate: { type: Date },
 
-    skills?: ISkill[]
+    description: { type: String },
+    points: { type: [String], required: true },
 
-    icon?: "github"
-    website?: string
-}
+    skills: { type: [skillSchema] },
+
+    icon: { type: String, enum: ["github"] },
+    website: { type: String },
+});

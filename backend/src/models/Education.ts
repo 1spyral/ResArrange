@@ -1,14 +1,20 @@
-export interface IEducation {
-    institution: string
-    degree: string
-    location: string
+import { Schema, Document } from "mongoose"
+import { IEducation } from "@/interfaces/Education"
+import { skillSchema } from "@/models/Skill"
 
-    startDate: Date
-    endDate?: Date
+export interface EducationDocument extends IEducation, Document {}
 
-    description?: string
-    points?: string[]
+export const educationSchema = new Schema({
+    institution: { type: String, required: true },
+    degree: { type: String, required: true },
+    location: { type: String, required: true },
 
-    courses?: string[]
-    skills?: string[]
-}
+    startDate: { type: Date, required: true },
+    endDate: { type: Date },
+
+    description: { type: String },
+    points: { type: [String] },
+
+    courses: { type: [String] },
+    skills: { type: [skillSchema] }
+})
