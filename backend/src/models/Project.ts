@@ -1,6 +1,6 @@
-import { Schema, Document } from "mongoose";
-import { IProject } from "@/interfaces/Project";
-import { skillSchema } from "@/models/Skill";
+import { Schema, Document } from "mongoose"
+import { IProject } from "@/interfaces/Project"
+import { skillSchema } from "@/models/Skill"
 
 export interface ProjectDocument extends IProject, Document {}
 
@@ -17,4 +17,4 @@ export const projectSchema = new Schema({
 
     icon: { type: String, enum: ["github"] },
     website: { type: String },
-});
+})

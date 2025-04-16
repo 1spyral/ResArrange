@@ -15,5 +15,5 @@ export const experienceSchema = new Schema({
     description: { type: String },
     points: { type: [String] },
 
-    skills: { type: [skillSchema] }
+    skills: { type: [skillSchema] },
 })

@@ -20,7 +20,7 @@ const userSchema = new Schema({
     education: { type: [educationSchema], required: true },
     experience: { type: [experienceSchema], required: true },
     projects: { type: [projectSchema], required: true },
-    skills: { type: [skillSchema], required: true }
+    skills: { type: [skillSchema], required: true },
 })
 
 export const UserModel = mongoose.model<UserDocument>("User", userSchema)

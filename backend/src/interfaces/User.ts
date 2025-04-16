@@ -16,5 +16,5 @@ export interface IUser {
     education: IEducation[]
     experience: IExperience[]
     projects: IProject[]
-    skills: ISkill[],
+    skills: ISkill[]
 }

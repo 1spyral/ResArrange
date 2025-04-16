@@ -16,5 +16,5 @@ export const educationSchema = new Schema({
     points: { type: [String] },
 
     courses: { type: [String] },
-    skills: { type: [skillSchema] }
+    skills: { type: [skillSchema] },
 })
