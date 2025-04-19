@@ -1,4 +1,7 @@
 import express from "express"
+import { createHandler } from "graphql-http/lib/use/express"
+import { schema } from "@/schema"
+import { context } from "@/Context"
 import { userRoutes } from "@/routes/userRoutes"
 
 export const app = express()
@@ -11,3 +14,8 @@ app.get("/", (req, res) => {
 })
 
 app.use("/user", userRoutes)
+
+app.all("/graphql", createHandler({
+    schema,
+    context: context as any
+}))
