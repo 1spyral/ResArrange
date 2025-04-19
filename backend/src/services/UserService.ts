@@ -1,5 +1,5 @@
 import { Types } from "mongoose"
-import { UserDocument, UserModel } from "@/models/User"
+import { UserDocument, UserModel } from "@/models/UserModel"
 
 export class UserService {
     static async getUser(id: string): Promise<UserDocument | null> {

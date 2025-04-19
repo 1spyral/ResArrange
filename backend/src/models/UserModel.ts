@@ -1,9 +1,9 @@
 import mongoose, { Schema, Document } from "mongoose"
 import { IUser } from "@/interfaces/User"
-import { educationSchema } from "@/models/Education"
-import { experienceSchema } from "@/models/Experience"
-import { projectSchema } from "@/models/Project"
-import { skillSchema } from "@/models/Skill"
+import { educationSchema } from "@/models/EducationModel"
+import { experienceSchema } from "@/models/ExperienceModel"
+import { projectSchema } from "@/models/ProjectModel"
+import { skillSchema } from "@/models/SkillModel"
 
 export interface UserDocument extends IUser, Document {}
 

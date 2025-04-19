@@ -1,6 +1,6 @@
 import { Schema, Document } from "mongoose"
 import { IProject } from "@/interfaces/Project"
-import { skillSchema } from "@/models/Skill"
+import { skillSchema } from "@/models/SkillModel"
 
 export interface ProjectDocument extends IProject, Document {}
 

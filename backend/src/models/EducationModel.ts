@@ -1,6 +1,6 @@
 import { Schema, Document } from "mongoose"
 import { IEducation } from "@/interfaces/Education"
-import { skillSchema } from "@/models/Skill"
+import { skillSchema } from "@/models/SkillModel"
 
 export interface EducationDocument extends IEducation, Document {}
 
