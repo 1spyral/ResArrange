@@ -18,5 +18,5 @@ await build({
         "zlib",
         "url",
     ],
-    format: "cjs",
+    format: "esm",
 })
