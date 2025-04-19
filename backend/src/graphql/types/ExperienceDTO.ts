@@ -7,12 +7,12 @@ export class ExperienceDTO {
     @Field(() => String) position!: string
     @Field(() => String) location!: string
     @Field(() => String) startDate!: string
-    @Field(() => String) endDate?: string
-    @Field(() => String) description?: string
+    @Field(() => String, { nullable: true }) endDate?: string
+    @Field(() => String, { nullable: true }) description?: string
 
-    @Field(() => [String])
+    @Field(() => [String], { nullable: true })
     points?: string[]
 
-    @Field(() => [SkillDTO])
+    @Field(() => [SkillDTO], { nullable: true })
     skills?: SkillDTO[]
 }
