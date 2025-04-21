@@ -1,19 +1,22 @@
-import { Schema, Document } from "mongoose"
 import { IExperience } from "@/interfaces/Experience"
-import { skillSchema } from "@/models/SkillModel"
+import { neode } from "@/lib/neode"
+import { RelationshipDirectionEnum } from "@bytebunker/neode"
 
-export interface ExperienceDocument extends IExperience, Document {}
+export const ExperienceModel = neode.model<IExperience>("Experience", {
+    company: { type: "string", required: true },
+    position: { type: "string", required: true },
+    location: { type: "string", required: true },
 
-export const experienceSchema = new Schema({
-    company: { type: String, required: true },
-    position: { type: String, required: true },
-    location: { type: String, required: true },
+    startDate: { type: "datetime", required: true },
+    endDate: { type: "datetime" },
 
-    startDate: { type: Date, required: true },
-    endDate: { type: Date },
+    description: { type: "string" },
+    points: { type: "string" },
 
-    description: { type: String },
-    points: { type: [String] },
-
-    skills: { type: [skillSchema] },
+    skills: {
+        type: "nodes",
+        direction: RelationshipDirectionEnum.OUT,
+        target: "Skill",
+        relationship: "USES",
+    },
 })

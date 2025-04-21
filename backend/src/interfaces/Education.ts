@@ -1,4 +1,4 @@
-export interface IEducation {
+export interface IEducation extends NeodeModel {
     institution: string
     degree: string
     location: string

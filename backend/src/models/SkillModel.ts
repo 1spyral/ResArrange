@@ -1,9 +1,10 @@
-import { Schema, Document } from "mongoose"
+import { neode } from "@/lib/neode"
 import { ISkill } from "@/interfaces/Skill"
 
-export interface SkillDocument extends ISkill, Document {}
+export const SkillModel = neode.model<ISkill>("Skill", {
+    name: { type: "string", required: true },
 
-export const skillSchema = new Schema({
-    name: { type: String, required: true },
-    categories: { type: [String], required: true },
+    categories: {
+        type: "string",
+    },
 })

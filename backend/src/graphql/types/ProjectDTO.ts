@@ -14,6 +14,6 @@ export class ProjectDTO {
     @Field(() => [SkillDTO], { nullable: true })
     skills?: SkillDTO[]
 
-    @Field(() => String, {nullable: true }) icon?: string
-    @Field(() => String, {nullable: true }) website?: string
+    @Field(() => String, { nullable: true }) icon?: string
+    @Field(() => String, { nullable: true }) website?: string
 }

@@ -1,20 +1,23 @@
-import { Schema, Document } from "mongoose"
 import { IProject } from "@/interfaces/Project"
-import { skillSchema } from "@/models/SkillModel"
+import { neode } from "@/lib/neode"
+import { RelationshipDirectionEnum } from "@bytebunker/neode"
 
-export interface ProjectDocument extends IProject, Document {}
+export const ProjectModel = neode.model<IProject>("Project", {
+    title: { type: "string", required: true },
 
-export const projectSchema = new Schema({
-    title: { type: String, required: true },
+    startDate: { type: "datetime", required: true },
+    endDate: { type: "datetime" },
 
-    startDate: { type: Date, required: true },
-    endDate: { type: Date },
+    description: { type: "string" },
+    points: { type: "string" },
 
-    description: { type: String },
-    points: { type: [String], required: true },
+    skills: {
+        type: "nodes",
+        direction: RelationshipDirectionEnum.OUT,
+        target: "Skill",
+        relationship: "USES",
+    },
 
-    skills: { type: [skillSchema] },
-
-    icon: { type: String, enum: ["github"] },
-    website: { type: String },
+    icon: { type: "string" },
+    website: { type: "string" },
 })

@@ -1,26 +1,45 @@
-import mongoose, { Schema, Document } from "mongoose"
 import { IUser } from "@/interfaces/User"
-import { educationSchema } from "@/models/EducationModel"
-import { experienceSchema } from "@/models/ExperienceModel"
-import { projectSchema } from "@/models/ProjectModel"
-import { skillSchema } from "@/models/SkillModel"
+import { neode } from "@/lib/neode"
+import {
+    RelationshipCascadePolicyEnum,
+    RelationshipDirectionEnum,
+} from "@bytebunker/neode"
 
-export interface UserDocument extends IUser, Document {}
+export const UserModel = neode.model<IUser>("User", {
+    name: { type: "string", required: true },
 
-const userSchema = new Schema({
-    name: { type: String, required: true },
+    phone: { type: "string" },
+    email: { type: "string", email: true },
+    linkedin: { type: "string" },
+    github: { type: "string" },
+    website: { type: "string" },
+    location: { type: "string" },
 
-    phone: { type: String },
-    email: { type: String },
-    linkedin: { type: String },
-    github: { type: String },
-    website: { type: String },
-    location: { type: String },
-
-    education: { type: [educationSchema], required: true },
-    experience: { type: [experienceSchema], required: true },
-    projects: { type: [projectSchema], required: true },
-    skills: { type: [skillSchema], required: true },
+    education: {
+        type: "nodes",
+        direction: RelationshipDirectionEnum.OUT,
+        target: "Education",
+        relationship: "OWNS",
+        cascade: RelationshipCascadePolicyEnum.DELETE,
+    },
+    experience: {
+        type: "nodes",
+        direction: RelationshipDirectionEnum.OUT,
+        target: "Experience",
+        relationship: "OWNS",
+        cascade: RelationshipCascadePolicyEnum.DELETE,
+    },
+    projects: {
+        type: "nodes",
+        direction: RelationshipDirectionEnum.OUT,
+        target: "Project",
+        relationship: "OWNS",
+        cascade: RelationshipCascadePolicyEnum.DELETE,
+    },
+    skills: {
+        type: "nodes",
+        direction: RelationshipDirectionEnum.OUT,
+        target: "Skill",
+        relationship: "HAS",
+    },
 })
-
-export const UserModel = mongoose.model<UserDocument>("User", userSchema)

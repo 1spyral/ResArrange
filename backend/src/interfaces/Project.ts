@@ -1,6 +1,6 @@
 import { ISkill } from "@/interfaces/Skill"
 
-export interface IProject {
+export interface IProject extends NeodeModel {
     title: string
 
     startDate: Date

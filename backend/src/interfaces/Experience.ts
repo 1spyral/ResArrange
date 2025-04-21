@@ -1,6 +1,6 @@
 import { ISkill } from "@/interfaces/Skill"
 
-export interface IExperience {
+export interface IExperience extends NeodeModel {
     company: string
     title: string
     location: string

@@ -3,7 +3,7 @@ import { IExperience } from "@/interfaces/Experience"
 import { IProject } from "@/interfaces/Project"
 import { ISkill } from "@/interfaces/Skill"
 
-export interface IUser {
+export interface IUser extends NeodeModel {
     name: string
 
     phone?: string
