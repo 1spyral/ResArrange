@@ -3,6 +3,8 @@ import { neode } from "@/lib/neode"
 import { RelationshipDirectionEnum } from "@bytebunker/neode"
 
 export const EducationModel = neode.model<IEducation>("Education", {
+    id: { type: "int", required: true, indexed: true, primary: true, unique: true },
+
     institution: { type: "string", required: true },
     degree: { type: "string", required: true },
     location: { type: "string", required: true },

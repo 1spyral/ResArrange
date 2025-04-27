@@ -5,12 +5,11 @@ export const userRoutes = Router()
 
 userRoutes.get("/", async (req: Request<{}, {}, {}, { id: string }>, res) => {
     try {
-        const { id } = req.query
+        const id = parseInt(req.query.id)
 
         if (!id) {
             res.status(400).send({ error: "ID is required" })
         }
-
         const user = await UserService.getUser(id)
 
         if (user) {

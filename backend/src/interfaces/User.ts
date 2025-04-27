@@ -4,6 +4,7 @@ import { IProject } from "@/interfaces/Project"
 import { ISkill } from "@/interfaces/Skill"
 
 export interface IUser extends NeodeModel {
+    id: number
     name: string
 
     phone?: string

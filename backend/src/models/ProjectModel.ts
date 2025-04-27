@@ -3,6 +3,8 @@ import { neode } from "@/lib/neode"
 import { RelationshipDirectionEnum } from "@bytebunker/neode"
 
 export const ProjectModel = neode.model<IProject>("Project", {
+    id: { type: "int", required: true, indexed: true, primary: true, unique: true },
+
     title: { type: "string", required: true },
 
     startDate: { type: "datetime", required: true },

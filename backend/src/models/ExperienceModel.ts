@@ -3,6 +3,8 @@ import { neode } from "@/lib/neode"
 import { RelationshipDirectionEnum } from "@bytebunker/neode"
 
 export const ExperienceModel = neode.model<IExperience>("Experience", {
+    id: { type: "int", required: true, indexed: true, primary: true, unique: true },
+
     company: { type: "string", required: true },
     position: { type: "string", required: true },
     location: { type: "string", required: true },

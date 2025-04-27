@@ -6,6 +6,8 @@ import {
 } from "@bytebunker/neode"
 
 export const UserModel = neode.model<IUser>("User", {
+    id: { type: "int", required: true, indexed: true, primary: true, unique: true },
+
     name: { type: "string", required: true },
 
     phone: { type: "string" },
