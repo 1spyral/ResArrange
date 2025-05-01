@@ -9,7 +9,7 @@ export interface IProject extends NeodeModel {
     description?: string
     points: string[]
 
-    skills?: ISkill[]
+    skills: ISkill[]
 
     icon?: "github"
     website?: string

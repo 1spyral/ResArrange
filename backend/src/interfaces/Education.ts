@@ -7,8 +7,8 @@ export interface IEducation extends NeodeModel {
     endDate?: Date
 
     description?: string
-    points?: string[]
+    points: string[]
 
-    courses?: string[]
-    skills?: string[]
+    courses: string[]
+    skills: string[]
 }

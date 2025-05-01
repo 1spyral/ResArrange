@@ -11,5 +11,5 @@ export interface IExperience extends NeodeModel {
     description?: string
     points: string[]
 
-    skills?: ISkill[]
+    skills: ISkill[]
 }
