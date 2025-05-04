@@ -15,13 +15,13 @@ import { Field, Int, ObjectType } from "type-graphql"
 @Entity()
 @ObjectType()
 export class User {
-    @PrimaryKey()
+    @PrimaryKey({ type: "int" })
     @Field(() => Int)
-    id: number = 0
+    id!: number
 
-    @Property({ type: "text" })
+    @Property({ type: "text", nullable: true })
     @Field(() => String)
-    name!: string
+    name?: string
 
     @Property({ type: "text", nullable: true })
     @Field(() => String, { nullable: true })

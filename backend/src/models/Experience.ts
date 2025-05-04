@@ -14,9 +14,9 @@ import { Field, Int, ObjectType } from "type-graphql"
 @Entity()
 @ObjectType()
 export class Experience {
-    @PrimaryKey()
+    @PrimaryKey({ type: "int" })
     @Field(() => Int)
-    id: number = 0
+    id!: number
 
     @Property({ type: "text" })
     @Field(() => String)

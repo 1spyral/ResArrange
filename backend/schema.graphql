@@ -35,6 +35,14 @@ type Experience {
   user: User!
 }
 
+type Mutation {
+  """Returns a JWT token of the logged in user"""
+  login(password: String!, username: String!): String!
+
+  """Returns a JWT token of the created user's session"""
+  signup(password: String!, username: String!): String!
+}
+
 type Project {
   description: String
   endDate: Date

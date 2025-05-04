@@ -3,6 +3,9 @@ declare namespace NodeJS {
         // Port
         PORT?: string
 
+        // Auth
+        JWT_SECRET: string
+
         // PostgreSQL
         DB_HOST: string
         DB_PORT: string

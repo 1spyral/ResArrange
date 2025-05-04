@@ -15,9 +15,9 @@ import { Field, Int, ObjectType, registerEnumType } from "type-graphql"
 @Entity()
 @ObjectType()
 export class Project {
-    @PrimaryKey()
+    @PrimaryKey({ type: "int" })
     @Field(() => Int)
-    id: number = 0
+    id!: number
 
     @Property({ type: "text" })
     @Field(() => String)
