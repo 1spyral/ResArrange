@@ -3,12 +3,11 @@ declare namespace NodeJS {
         // Port
         PORT?: string
 
-        // MongoDB
-        MONGODB_URI: string
-
-        // Neo4j
-        NEO4J_URI: string
-        NEO4J_USERNAME: string
-        NEO4J_PASSWORD: string
+        // PostgreSQL
+        DB_HOST: string
+        DB_PORT: string
+        DB_USERNAME: string
+        DB_PASSWORD: string
+        DB_NAME: string
     }
 }

@@ -5,10 +5,9 @@ const env = process.env
 // Port
 export const PORT = env.PORT ? parseInt(env.PORT) : 4000
 
-// MongoDB
-export const MONGODB_URI = env.MONGODB_URI
-
-// Neo4j
-export const NEO4J_URI = env.NEO4J_URI ?? "bolt://localhost:7687"
-export const NEO4J_USERNAME = env.NEO4J_USERNAME ?? "neo4j"
-export const NEO4J_PASSWORD = env.NEO4J_PASSWORD
+// PostgreSQL
+export const DB_HOST = env.DB_HOST ?? "localhost"
+export const DB_PORT = env.DB_PORT ? parseInt(env.DB_PORT) : 5432
+export const DB_USERNAME = env.DB_USERNAME ?? "postgres"
+export const DB_PASSWORD = env.DB_PASSWORD
+export const DB_NAME = env.DB_NAME ?? "postgres"

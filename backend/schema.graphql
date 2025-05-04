@@ -3,55 +3,70 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+"""
+A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar Date
+
 type Education {
-  courses: [String!]
+  courses: [String!]!
   degree: String!
   description: String
-  endDate: String
+  endDate: Date
+  id: Int!
   institution: String!
   location: String!
-  points: [String!]
-  skills: [Skill!]
-  startDate: String!
+  points: [String!]!
+  skills: [Skill!]!
+  startDate: Date!
+  user: User!
 }
 
 type Experience {
   company: String!
   description: String
-  endDate: String
+  endDate: Date
+  id: Int!
   location: String!
-  points: [String!]
-  position: String!
-  skills: [Skill!]
-  startDate: String!
+  points: [String!]!
+  skills: [Skill!]!
+  startDate: Date!
+  title: String!
+  user: User!
 }
 
 type Project {
   description: String
-  endDate: String
-  icon: String
+  endDate: Date
+  icon: ProjectIconType
+  id: Int!
   points: [String!]!
-  skills: [Skill!]
-  startDate: String!
+  skills: [Skill!]!
+  startDate: Date!
   title: String!
+  user: User!
   website: String
 }
 
+enum ProjectIconType {
+  GITHUB
+}
+
 type Query {
-  user(id: String!): User
+  user(id: Int!): User
 }
 
 type Skill {
-  categories: [String!]!
+  id: Int!
   name: String!
 }
 
 type User {
-  education: [Education!]!
+  educations: [Education!]!
   email: String
-  experience: [Experience!]!
+  experiences: [Experience!]!
   github: String
-  id: String!
+  id: Int!
   linkedin: String
   location: String
   name: String!
