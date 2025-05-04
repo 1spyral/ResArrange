@@ -1,5 +1,5 @@
-import { Skill } from "@/models/Skill"
-import { User } from "@/models/User"
+import { Skill } from "."
+import { User } from "@/api/user"
 import {
     Collection,
     Entity,

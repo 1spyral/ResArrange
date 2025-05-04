@@ -1,7 +1,7 @@
-import { Education } from "@/models/Education"
-import { Experience } from "@/models/Experience"
-import { Project } from "@/models/Project"
-import { Skill } from "@/models/Skill"
+import { Education } from "@/api/common/education.entity"
+import { Experience } from "@/api/common/experience.entity"
+import { Project } from "@/api/common/project.entity"
+import { Skill } from "@/api/common/skill.entity"
 import {
     Collection,
     Entity,
@@ -20,7 +20,7 @@ export class User {
     id!: number
 
     @Property({ type: "text", nullable: true })
-    @Field(() => String)
+    @Field(() => String, { nullable: true })
     name?: string
 
     @Property({ type: "text", nullable: true })

@@ -1,5 +1,5 @@
-import { Skill } from "@/models/Skill"
-import { User } from "@/models/User"
+import { Skill } from "."
+import { User } from "@/api/user"
 import {
     Collection,
     Entity,
@@ -13,18 +13,18 @@ import { Field, Int, ObjectType } from "type-graphql"
 
 @Entity()
 @ObjectType()
-export class Education {
+export class Experience {
     @PrimaryKey({ type: "int" })
     @Field(() => Int)
     id!: number
 
     @Property({ type: "text" })
     @Field(() => String)
-    institution!: string
+    company!: string
 
     @Property({ type: "text" })
     @Field(() => String)
-    degree!: string
+    title!: string
 
     @Property({ type: "text" })
     @Field(() => String)
@@ -46,17 +46,13 @@ export class Education {
     @Field(() => [String])
     points!: string[]
 
-    @Property({ type: "text[]" })
-    @Field(() => [String])
-    courses!: string[]
-
     @ManyToOne(() => User)
     @Field(() => User)
     user!: User
 
     @ManyToMany(() => Skill, undefined, {
         owner: true,
-        pivotTable: "education_skill",
+        pivotTable: "experience_skill",
     })
     @Field(() => [Skill])
     skills = new Collection<Skill>(this)

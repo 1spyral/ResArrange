@@ -1,6 +1,7 @@
+import { apolloMiddleware } from "@/graphql/server"
+import { authenticateToken } from "@/middleware/authenticateToken"
 import cors from "cors"
 import express from "express"
-import { apolloMiddleware } from "@/apolloServer"
 
 export const app = express()
 
@@ -13,4 +14,4 @@ app.get("/", (req, res) => {
     res.send("Root endpoint")
 })
 
-app.use("/graphql", apolloMiddleware)
+app.use("/graphql", authenticateToken, apolloMiddleware)

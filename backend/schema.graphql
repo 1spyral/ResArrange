@@ -61,7 +61,7 @@ enum ProjectIconType {
 }
 
 type Query {
-  user(id: Int!): User
+  user: User
 }
 
 type Skill {
@@ -77,7 +77,7 @@ type User {
   id: Int!
   linkedin: String
   location: String
-  name: String!
+  name: String
   phone: String
   projects: [Project!]!
   skills: [Skill!]!

@@ -1,17 +1,19 @@
-import { Context } from "@/context"
+import { User } from "@/api/user"
+import { Context } from "@/graphql/context"
 import { extractRelations } from "@/helpers/extractRelations"
-import { User } from "@/models/User"
 import { GraphQLResolveInfo } from "graphql"
-import { Arg, Ctx, Info, Int, Mutation, Query, Resolver } from "type-graphql"
+import { Authorized, Ctx, Info, Query, Resolver } from "type-graphql"
 
 @Resolver(User)
 export class UserResolver {
+    @Authorized()
     @Query(() => User, { nullable: true })
     async user(
         @Info() info: GraphQLResolveInfo,
-        @Ctx() { em }: Context,
-        @Arg("id", () => Int) id: number
+        @Ctx() { user, em }: Context
     ): Promise<User | null> {
+        const id = user!.id
+
         const populate = extractRelations(info)
 
         return await em.findOne(User, id, {

@@ -1,4 +1,4 @@
-import { User } from "@/models/User"
+import { User } from "@/api/user"
 import { Entity, Enum, ManyToOne, Property } from "@mikro-orm/core"
 
 @Entity()
