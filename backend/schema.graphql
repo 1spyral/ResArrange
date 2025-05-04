@@ -41,6 +41,7 @@ type Mutation {
 
   """Returns a JWT token of the created user's session"""
   signup(password: String!, username: String!): String!
+  updateUser(input: UpdateUserInput!): User!
 }
 
 type Project {
@@ -61,12 +62,21 @@ enum ProjectIconType {
 }
 
 type Query {
-  user: User
+  user: User!
 }
 
 type Skill {
   id: Int!
   name: String!
+}
+
+input UpdateUserInput {
+  github: String
+  linkedin: String
+  location: String
+  name: String
+  phone: String
+  website: String
 }
 
 type User {
