@@ -1,7 +1,7 @@
-import { Education } from "@/api/common/education.entity"
-import { Experience } from "@/api/common/experience.entity"
-import { Project } from "@/api/common/project.entity"
-import { Skill } from "@/api/common/skill.entity"
+import { Education } from "@/api/education"
+import { Experience } from "@/api/experience"
+import { Project } from "@/api/project"
+import { Skill } from "@/api/skill"
 import {
     Collection,
     Entity,

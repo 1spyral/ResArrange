@@ -1,4 +1,4 @@
-import { Skill } from "."
+import { Skill } from "@/api/skill"
 import { User } from "@/api/user"
 import {
     Collection,

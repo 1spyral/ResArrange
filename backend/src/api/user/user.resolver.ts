@@ -1,4 +1,4 @@
-import { User } from "@/api/user"
+import { User } from "."
 import { UpdateUserInput } from "@/api/user/user.input"
 import { Context } from "@/graphql/context"
 import { extractRelations } from "@/helpers/extractRelations"

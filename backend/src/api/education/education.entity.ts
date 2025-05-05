@@ -1,27 +1,34 @@
-import { Skill } from "."
+import { Skill } from "@/api/skill"
 import { User } from "@/api/user"
 import {
     Collection,
     Entity,
-    Enum,
     ManyToMany,
     ManyToOne,
     PrimaryKey,
     Property,
 } from "@mikro-orm/core"
 import { GraphQLDate } from "graphql-scalars"
-import { Field, Int, ObjectType, registerEnumType } from "type-graphql"
+import { Field, Int, ObjectType } from "type-graphql"
 
 @Entity()
 @ObjectType()
-export class Project {
+export class Education {
     @PrimaryKey({ type: "int" })
     @Field(() => Int)
     id!: number
 
     @Property({ type: "text" })
     @Field(() => String)
-    title!: string
+    institution!: string
+
+    @Property({ type: "text" })
+    @Field(() => String)
+    degree!: string
+
+    @Property({ type: "text" })
+    @Field(() => String)
+    location!: string
 
     @Property({ type: "date" })
     @Field(() => GraphQLDate)
@@ -39,13 +46,9 @@ export class Project {
     @Field(() => [String])
     points!: string[]
 
-    @Enum({ items: () => ProjectIconType, nullable: true })
-    @Field(() => ProjectIconType, { nullable: true })
-    icon?: ProjectIconType
-
-    @Property({ type: "text", nullable: true })
-    @Field(() => String, { nullable: true })
-    website?: string
+    @Property({ type: "text[]" })
+    @Field(() => [String])
+    courses!: string[]
 
     @ManyToOne(() => User)
     @Field(() => User)
@@ -53,16 +56,8 @@ export class Project {
 
     @ManyToMany(() => Skill, undefined, {
         owner: true,
-        pivotTable: "project_skill",
+        pivotTable: "education_skill",
     })
     @Field(() => [Skill])
     skills = new Collection<Skill>(this)
 }
-
-export enum ProjectIconType {
-    GITHUB = "github",
-}
-
-registerEnumType(ProjectIconType, {
-    name: "ProjectIconType",
-})
