@@ -17,6 +17,15 @@ await build({
         "stream/promises",
         "zlib",
         "url",
+        "mariadb",
+        "better-sqlite3",
+        "libsql",
+        "tedious",
+        "mysql",
+        "mysql2",
+        "oracledb",
+        "pg-query-stream",
+        "sqlite3"
     ],
     format: "esm",
 })
