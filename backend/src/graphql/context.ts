@@ -4,7 +4,7 @@ import { EntityManager } from "@mikro-orm/postgresql"
 import { Request } from "express"
 
 export interface Context {
-    user?: Payload,
+    user?: Payload
     em: EntityManager
 }
 

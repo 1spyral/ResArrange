@@ -19,5 +19,5 @@ await server.start()
 console.log("✅ Apollo Server started")
 
 export const apolloMiddleware = expressMiddleware(server, {
-    context
+    context,
 })

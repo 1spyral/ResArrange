@@ -1,4 +1,11 @@
-import { DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT, DB_USERNAME, NODE_ENV } from "@/config"
+import {
+    DB_HOST,
+    DB_NAME,
+    DB_PASSWORD,
+    DB_PORT,
+    DB_USERNAME,
+    NODE_ENV,
+} from "@/config"
 import { MikroORM } from "@mikro-orm/postgresql"
 import * as fs from "node:fs"
 

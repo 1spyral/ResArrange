@@ -1,4 +1,5 @@
 import { Project } from "@/api/project/project.entity"
+import { GraphQLInt } from "graphql"
 import { GraphQLDate } from "graphql-scalars"
 import { Field, InputType } from "type-graphql"
 
@@ -22,13 +23,13 @@ export class CreateProjectInput implements Partial<Project> {
     @Field(() => String, { nullable: true })
     website?: string
 
-    @Field(() => [Number], { description: "Array of skill IDs" })
+    @Field(() => [GraphQLInt], { description: "Array of skill IDs" })
     skillIds!: number[]
 }
 
 @InputType()
 export class UpdateProjectInput implements Partial<Project> {
-    @Field(() => Number)
+    @Field(() => GraphQLInt)
     id!: number
 
     @Field(() => String, { nullable: true })
@@ -49,6 +50,9 @@ export class UpdateProjectInput implements Partial<Project> {
     @Field(() => String, { nullable: true })
     website?: string
 
-    @Field(() => [Number], { description: "Array of skill IDs", nullable: true })
+    @Field(() => [GraphQLInt], {
+        description: "Array of skill IDs",
+        nullable: true,
+    })
     skillIds?: number[]
 }

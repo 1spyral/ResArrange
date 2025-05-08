@@ -3,7 +3,15 @@ import { UpdateUserInput } from "@/api/user/user.input"
 import { Context } from "@/graphql/context"
 import { extractRelations } from "@/helpers/extractRelations"
 import { GraphQLResolveInfo } from "graphql"
-import { Arg, Authorized, Ctx, Info, Mutation, Query, Resolver } from "type-graphql"
+import {
+    Arg,
+    Authorized,
+    Ctx,
+    Info,
+    Mutation,
+    Query,
+    Resolver,
+} from "type-graphql"
 
 @Resolver(User)
 export class UserResolver {

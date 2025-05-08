@@ -9,7 +9,7 @@ input CreateProjectInput {
   points: [String!]!
 
   """Array of skill IDs"""
-  skillIds: [Float!]!
+  skillIds: [Int!]!
   startDate: Date!
   title: String!
   website: String
@@ -49,7 +49,7 @@ type Experience {
 
 type Mutation {
   createProject(input: CreateProjectInput!): Project!
-  deleteProject(id: Float!): Boolean!
+  deleteProject(id: Int!): Boolean!
 
   """Returns a JWT token of the logged in user"""
   login(password: String!, username: String!): String!
@@ -78,6 +78,7 @@ enum ProjectIconType {
 }
 
 type Query {
+  project(id: Int!): Project
   user: User!
 }
 
@@ -89,11 +90,11 @@ type Skill {
 input UpdateProjectInput {
   description: String
   endDate: Date
-  id: Float!
+  id: Int!
   points: [String!]
 
   """Array of skill IDs"""
-  skillIds: [Float!]
+  skillIds: [Int!]
   startDate: Date
   title: String
   website: String
