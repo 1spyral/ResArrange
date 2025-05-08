@@ -1,10 +1,10 @@
 import { GraphQLResolveInfo } from "graphql"
 import graphqlFields from "graphql-fields"
 
-export function extractRelations(info: GraphQLResolveInfo): string[] {
+export function extractRelations(info: GraphQLResolveInfo): false {
     const fields = graphqlFields(info)
 
-    return extractRelationsFromFields(fields)
+    return extractRelationsFromFields(fields) as unknown as false
 }
 
 function extractRelationsFromFields(fields: any, prefix = ""): string[] {

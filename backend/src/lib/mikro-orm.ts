@@ -1,5 +1,6 @@
-import { DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT, DB_USERNAME } from "@/config"
+import { DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT, DB_USERNAME, NODE_ENV } from "@/config"
 import { MikroORM } from "@mikro-orm/postgresql"
+import * as fs from "node:fs"
 
 const config = {
     entities: ["./dist/**/*.entity.js"],
@@ -12,3 +13,10 @@ const config = {
 }
 
 export const orm = await MikroORM.init(config)
+
+if (NODE_ENV === "development") {
+    const schemaGenerator = orm.getSchemaGenerator()
+    const dump = await schemaGenerator.getCreateSchemaSQL()
+    fs.writeFileSync("./schema.sql", dump)
+    console.log("Schema dumped to schema.sql")
+}

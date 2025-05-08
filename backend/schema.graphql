@@ -3,6 +3,18 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+input CreateProjectInput {
+  description: String
+  endDate: Date
+  points: [String!]!
+
+  """Array of skill IDs"""
+  skillIds: [Float!]!
+  startDate: Date!
+  title: String!
+  website: String
+}
+
 """
 A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
 """
@@ -36,11 +48,15 @@ type Experience {
 }
 
 type Mutation {
+  createProject(input: CreateProjectInput!): Project!
+  deleteProject(id: Float!): Boolean!
+
   """Returns a JWT token of the logged in user"""
   login(password: String!, username: String!): String!
 
   """Returns a JWT token of the created user's session"""
   signup(password: String!, username: String!): String!
+  updateProject(input: UpdateProjectInput!): Project!
   updateUser(input: UpdateUserInput!): User!
 }
 
@@ -68,6 +84,19 @@ type Query {
 type Skill {
   id: Int!
   name: String!
+}
+
+input UpdateProjectInput {
+  description: String
+  endDate: Date
+  id: Float!
+  points: [String!]
+
+  """Array of skill IDs"""
+  skillIds: [Float!]
+  startDate: Date
+  title: String
+  website: String
 }
 
 input UpdateUserInput {

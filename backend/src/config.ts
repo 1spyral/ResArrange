@@ -2,6 +2,8 @@ import "dotenv/config"
 
 const env = process.env
 
+export const NODE_ENV = env.NODE_ENV ?? "development"
+
 // Port
 export const PORT = env.PORT ? parseInt(env.PORT) : 4000
 

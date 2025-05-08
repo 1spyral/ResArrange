@@ -31,7 +31,7 @@ export class UserResolver {
         @Ctx() { user, em }: Context,
         @Arg("input", () => UpdateUserInput) input: UpdateUserInput
     ): Promise<User> {
-        if (input.name === null || input.name?.trim() === "") {
+        if (input.name === null || !input.name?.trim()) {
             throw Error("Name cannot be null or empty, omit field instead")
         }
 
