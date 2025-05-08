@@ -2,7 +2,7 @@ import { Project } from "@/api/project/project.entity"
 import {
     CreateProjectInput,
     UpdateProjectInput,
-} from "@/api/project/project.input"
+} from "."
 import { Skill } from "@/api/skill"
 import { User } from "@/api/user"
 import { Context } from "@/graphql/context"
@@ -36,6 +36,17 @@ export class ProjectResolver {
                 populate,
             }
         )
+    }
+
+    @Authorized()
+    @Query(() => [Project], { name: "projects" })
+    async getProjects(
+        @Info() info: GraphQLResolveInfo,
+        @Ctx() { user, em }: Context
+    ): Promise<Project[]> {
+        const populate = extractRelations(info)
+
+        return await em.find(Project, { user: em.getReference(User, user!.id) }, { populate })
     }
 
     @Authorized()

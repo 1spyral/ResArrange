@@ -79,6 +79,7 @@ enum ProjectIconType {
 
 type Query {
   project(id: Int!): Project
+  projects: [Project!]!
   user: User!
 }
 
