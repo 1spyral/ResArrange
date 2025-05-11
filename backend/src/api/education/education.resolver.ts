@@ -1,6 +1,6 @@
-import { checkNotNull, checkNotNullOrEmpty } from "@/helpers/validateInput"
-import { Project, CreateProjectInput, UpdateProjectInput } from "."
 import { Skill } from "@/api/skill"
+import { checkNotNull, checkNotNullOrEmpty } from "@/helpers/validateInput"
+import { Education, CreateEducationInput, UpdateEducationInput } from "."
 import { Context } from "@/graphql/context"
 import { extractRelations } from "@/helpers/extractRelations"
 import { GraphQLInt, GraphQLResolveInfo } from "graphql"
@@ -14,49 +14,49 @@ import {
     Resolver
 } from "type-graphql"
 
-@Resolver(Project)
-export class ProjectResolver {
+@Resolver(Education)
+export class EducationResolver {
     @Authorized()
-    @Query(() => Project, { name: "project", nullable: true })
-    async getProject(
+    @Query(() => Education, { name: "education", nullable: true })
+    async getEducation(
         @Info() info: GraphQLResolveInfo,
         @Ctx() { user, em }: Context,
         @Arg("id", () => GraphQLInt) id: number
-    ): Promise<Project | null> {
+    ): Promise<Education | null> {
         const populate = extractRelations(info)
 
         return await em.findOne(
-            Project,
+            Education,
             { id, user: user!.id },
             { populate }
         )
     }
 
     @Authorized()
-    @Query(() => [Project], { name: "projects" })
-    async getProjects(
+    @Query(() => [Education], { name: "educations" })
+    async getEducations(
         @Info() info: GraphQLResolveInfo,
         @Ctx() { user, em }: Context
-    ): Promise<Project[]> {
+    ): Promise<Education[]> {
         const populate = extractRelations(info)
 
         return await em.find(
-            Project,
+            Education,
             { user: user!.id },
             { populate }
         )
     }
 
     @Authorized()
-    @Mutation(() => Project)
-    async createProject(
+    @Mutation(() => Education)
+    async createEducation(
         @Info() info: GraphQLResolveInfo,
         @Ctx() { user, em }: Context,
-        @Arg("input", () => CreateProjectInput) input: CreateProjectInput
-    ): Promise<Project> {
+        @Arg("input", () => CreateEducationInput) input: CreateEducationInput
+    ): Promise<Education> {
         const populate = extractRelations(info)
 
-        const project = em.create(Project, {
+        const education = em.create(Education, {
             ...input,
             user: user!.id,
             skills: input.skillIds.map(id => em.getReference(Skill, id))
@@ -64,21 +64,29 @@ export class ProjectResolver {
 
         await em.flush()
 
-        await em.populate(project, populate)
+        await em.populate(education, populate)
 
-        return project
+        return education
     }
 
     @Authorized()
-    @Mutation(() => Project)
-    async updateProject(
+    @Mutation(() => Education)
+    async updateEducation(
         @Info() info: GraphQLResolveInfo,
         @Ctx() { user, em }: Context,
-        @Arg("input", () => UpdateProjectInput) input: UpdateProjectInput
-    ): Promise<Project> {
+        @Arg("input", () => UpdateEducationInput) input: UpdateEducationInput
+    ): Promise<Education> {
         checkNotNullOrEmpty(
-            input.title,
-            "title cannot be null or empty, omit field instead"
+            input.institution,
+            "institution cannot be null or empty, omit field instead"
+        )
+        checkNotNullOrEmpty(
+            input.degree,
+            "degree cannot be null or empty, omit field instead"
+        )
+        checkNotNullOrEmpty(
+            input.location,
+            "location cannot be null or empty, omit field instead"
         )
         checkNotNull(
             input.startDate,
@@ -86,20 +94,24 @@ export class ProjectResolver {
         )
         checkNotNull(input.points, "points cannot be null, omit field instead")
         checkNotNull(
+            input.courses,
+            "courses cannot be null, omit field instead"
+        )
+        checkNotNull(
             input.skillIds,
             "skillIds cannot be null, omit field instead"
         )
 
         const populate = extractRelations(info)
 
-        const project = await em.findOneOrFail(
-            Project,
+        const education = await em.findOneOrFail(
+            Education,
             { id: input.id, user: user!.id },
             { populate }
         )
 
         em.assign(
-            project,
+            education,
             {
                 ...input,
                 startDate: input.startDate?.toISOString(),
@@ -117,20 +129,20 @@ export class ProjectResolver {
 
         await em.flush()
 
-        project.startDate = new Date(project.startDate)
-        project.endDate = project.endDate
-            ? new Date(project.endDate)
+        education.startDate = new Date(education.startDate)
+        education.endDate = education.endDate
+            ? new Date(education.endDate)
             : undefined
 
-        return project
+        return education
     }
 
     @Authorized()
     @Mutation(() => Boolean)
-    async deleteProject(
+    async deleteEducation(
         @Ctx() { user, em }: Context,
         @Arg("id", () => GraphQLInt) id: number
     ): Promise<boolean> {
-        return !!(await em.nativeDelete(Project, { id, user: user!.id }))
+        return !!(await em.nativeDelete(Education, { id, user: user!.id }))
     }
 }

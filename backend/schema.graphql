@@ -3,6 +3,20 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+input CreateEducationInput {
+  courses: [String!]!
+  degree: String!
+  description: String
+  endDate: Date
+  institution: String!
+  location: String!
+  points: [String!]!
+
+  """Array of skill IDs"""
+  skillIds: [Int!]!
+  startDate: Date!
+}
+
 input CreateExperienceInput {
   company: String!
   description: String
@@ -61,8 +75,10 @@ type Experience {
 }
 
 type Mutation {
+  createEducation(input: CreateEducationInput!): Education!
   createExperience(input: CreateExperienceInput!): Experience!
   createProject(input: CreateProjectInput!): Project!
+  deleteEducation(id: Int!): Boolean!
   deleteExperience(id: Int!): Boolean!
   deleteProject(id: Int!): Boolean!
 
@@ -71,6 +87,7 @@ type Mutation {
 
   """Returns a JWT token of the created user's session"""
   signup(password: String!, username: String!): String!
+  updateEducation(input: UpdateEducationInput!): Education!
   updateExperience(input: UpdateExperienceInput!): Experience!
   updateProject(input: UpdateProjectInput!): Project!
   updateUser(input: UpdateUserInput!): User!
@@ -94,6 +111,8 @@ enum ProjectIconType {
 }
 
 type Query {
+  education(id: Int!): Education
+  educations: [Education!]!
   experience(id: Int!): Experience
   experiences: [Experience!]!
   project(id: Int!): Project
@@ -104,6 +123,21 @@ type Query {
 type Skill {
   id: Int!
   name: String!
+}
+
+input UpdateEducationInput {
+  courses: [String!]
+  degree: String
+  description: String
+  endDate: Date
+  id: Int!
+  institution: String
+  location: String
+  points: [String!]
+
+  """Array of skill IDs"""
+  skillIds: [Int!]
+  startDate: Date
 }
 
 input UpdateExperienceInput {

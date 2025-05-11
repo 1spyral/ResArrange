@@ -1,6 +1,5 @@
 import { checkNotNull, checkNotNullOrEmpty } from "@/helpers/validateInput"
 import { Skill } from "@/api/skill"
-import { User } from "@/api/user"
 import { Context } from "@/graphql/context"
 import { extractRelations } from "@/helpers/extractRelations"
 import { GraphQLInt, GraphQLResolveInfo } from "graphql"
@@ -28,7 +27,7 @@ export class ExperienceResolver {
 
         return await em.findOne(
             Experience,
-            { id, user: em.getReference(User, user!.id) },
+            { id, user: user!.id },
             { populate }
         )
     }
@@ -43,7 +42,7 @@ export class ExperienceResolver {
 
         return await em.find(
             Experience,
-            { user: em.getReference(User, user!.id) },
+            { user: user!.id },
             { populate }
         )
     }
@@ -59,7 +58,7 @@ export class ExperienceResolver {
 
         const experience = em.create(Experience, {
             ...input,
-            user: em.getReference(User, user!.id),
+            user: user!.id,
             skills: input.skillIds.map(id => em.getReference(Skill, id))
         })
 
