@@ -3,6 +3,19 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+input CreateExperienceInput {
+  company: String!
+  description: String
+  endDate: Date
+  location: String!
+  points: [String!]!
+
+  """Array of skill IDs"""
+  skillIds: [Int!]!
+  startDate: Date!
+  title: String!
+}
+
 input CreateProjectInput {
   description: String
   endDate: Date
@@ -48,7 +61,9 @@ type Experience {
 }
 
 type Mutation {
+  createExperience(input: CreateExperienceInput!): Experience!
   createProject(input: CreateProjectInput!): Project!
+  deleteExperience(id: Int!): Boolean!
   deleteProject(id: Int!): Boolean!
 
   """Returns a JWT token of the logged in user"""
@@ -56,6 +71,7 @@ type Mutation {
 
   """Returns a JWT token of the created user's session"""
   signup(password: String!, username: String!): String!
+  updateExperience(input: UpdateExperienceInput!): Experience!
   updateProject(input: UpdateProjectInput!): Project!
   updateUser(input: UpdateUserInput!): User!
 }
@@ -78,6 +94,8 @@ enum ProjectIconType {
 }
 
 type Query {
+  experience(id: Int!): Experience
+  experiences: [Experience!]!
   project(id: Int!): Project
   projects: [Project!]!
   user: User!
@@ -86,6 +104,20 @@ type Query {
 type Skill {
   id: Int!
   name: String!
+}
+
+input UpdateExperienceInput {
+  company: String
+  description: String
+  endDate: Date
+  id: Int!
+  location: String
+  points: [String!]
+
+  """Array of skill IDs"""
+  skillIds: [Int!]
+  startDate: Date
+  title: String
 }
 
 input UpdateProjectInput {

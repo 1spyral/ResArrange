@@ -1,11 +1,12 @@
-import { Project } from "@/api/project/project.entity"
+import { Project } from "@/api/project"
 import { checkNotNull, checkNotNullOrEmpty } from "@/helpers/validateInput"
-import { CreateProjectInput, UpdateProjectInput } from "."
+import { CreateExperienceInput, UpdateExperienceInput } from "."
 import { Skill } from "@/api/skill"
 import { User } from "@/api/user"
 import { Context } from "@/graphql/context"
 import { extractRelations } from "@/helpers/extractRelations"
 import { GraphQLInt, GraphQLResolveInfo } from "graphql"
+import { Experience } from "."
 import {
     Arg,
     Authorized,
@@ -16,19 +17,19 @@ import {
     Resolver,
 } from "type-graphql"
 
-@Resolver(Project)
-export class ProjectResolver {
+@Resolver(Experience)
+export class ExperienceResolver {
     @Authorized()
-    @Query(() => Project, { name: "project", nullable: true })
-    async getProject(
+    @Query(() => Experience, { name: "experience", nullable: true })
+    async getExperience(
         @Info() info: GraphQLResolveInfo,
         @Ctx() { user, em }: Context,
         @Arg("id", () => GraphQLInt) id: number
-    ): Promise<Project | null> {
+    ): Promise<Experience | null> {
         const populate = extractRelations(info)
 
         return await em.findOne(
-            Project,
+            Experience,
             { id, user: em.getReference(User, user!.id) },
             {
                 populate,
@@ -37,30 +38,30 @@ export class ProjectResolver {
     }
 
     @Authorized()
-    @Query(() => [Project], { name: "projects" })
-    async getProjects(
+    @Query(() => [Experience], { name: "experiences" })
+    async getExperiences(
         @Info() info: GraphQLResolveInfo,
         @Ctx() { user, em }: Context
-    ): Promise<Project[]> {
+    ): Promise<Experience[]> {
         const populate = extractRelations(info)
 
         return await em.find(
-            Project,
+            Experience,
             { user: em.getReference(User, user!.id) },
             { populate }
         )
     }
 
     @Authorized()
-    @Mutation(() => Project)
-    async createProject(
+    @Mutation(() => Experience)
+    async createExperience(
         @Info() info: GraphQLResolveInfo,
         @Ctx() { user, em }: Context,
-        @Arg("input", () => CreateProjectInput) input: CreateProjectInput
-    ): Promise<Project> {
+        @Arg("input", () => CreateExperienceInput) input: CreateExperienceInput
+    ): Promise<Experience> {
         const populate = extractRelations(info)
 
-        const project = em.create(Project, {
+        const experience = em.create(Experience, {
             ...input,
             user: em.getReference(User, user!.id),
             skills: input.skillIds.map(id => em.getReference(Skill, id)),
@@ -68,21 +69,29 @@ export class ProjectResolver {
 
         await em.flush()
 
-        await em.populate(project, populate)
+        await em.populate(experience, populate)
 
-        return project
+        return experience
     }
 
     @Authorized()
-    @Mutation(() => Project)
-    async updateProject(
+    @Mutation(() => Experience)
+    async updateExperience(
         @Info() info: GraphQLResolveInfo,
         @Ctx() { user, em }: Context,
-        @Arg("input", () => UpdateProjectInput) input: UpdateProjectInput
-    ): Promise<Project> {
+        @Arg("input", () => UpdateExperienceInput) input: UpdateExperienceInput
+    ): Promise<Experience> {
+        checkNotNullOrEmpty(
+            input.company,
+            "company cannot be null or empty, omit field instead"
+        )
         checkNotNullOrEmpty(
             input.title,
             "title cannot be null or empty, omit field instead"
+        )
+        checkNotNullOrEmpty(
+            input.location,
+            "location cannot be null or empty, omit field instead"
         )
         checkNotNull(
             input.startDate,
@@ -96,14 +105,14 @@ export class ProjectResolver {
 
         const populate = extractRelations(info)
 
-        const project = await em.findOneOrFail(
-            Project,
+        const experience = await em.findOneOrFail(
+            Experience,
             { id: input.id, user: user!.id },
             { populate }
         )
 
         em.assign(
-            project,
+            experience,
             {
                 ...input,
                 startDate: input.startDate?.toISOString(),
@@ -123,20 +132,20 @@ export class ProjectResolver {
 
         await em.flush()
 
-        project.startDate = new Date(project.startDate)
-        project.endDate = project.endDate
-            ? new Date(project.endDate)
+        experience.startDate = new Date(experience.startDate)
+        experience.endDate = experience.endDate
+            ? new Date(experience.endDate)
             : undefined
 
-        return project
+        return experience
     }
 
     @Authorized()
     @Mutation(() => Boolean)
-    async deleteProject(
+    async deleteExperience(
         @Ctx() { user, em }: Context,
         @Arg("id", () => GraphQLInt) id: number
     ): Promise<boolean> {
-        return !!(await em.nativeDelete(Project, { id, user: user!.id }))
+        return !!(await em.nativeDelete(Experience, { id, user: user!.id }))
     }
 }
