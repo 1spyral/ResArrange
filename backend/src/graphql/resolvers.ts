@@ -7,5 +7,5 @@ export const resolvers = [
     AuthResolver,
     ExperienceResolver,
     ProjectResolver,
-    UserResolver,
+    UserResolver
 ]

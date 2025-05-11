@@ -6,7 +6,7 @@ import {
     ManyToMany,
     ManyToOne,
     PrimaryKey,
-    Property,
+    Property
 } from "@mikro-orm/core"
 import { GraphQLDate } from "graphql-scalars"
 import { Field, Int, ObjectType } from "type-graphql"
@@ -56,7 +56,7 @@ export class Education {
 
     @ManyToMany(() => Skill, undefined, {
         owner: true,
-        pivotTable: "education_skill",
+        pivotTable: "education_skill"
     })
     @Field(() => [Skill])
     skills = new Collection<Skill>(this)

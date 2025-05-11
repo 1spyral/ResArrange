@@ -7,7 +7,7 @@ import {
     ManyToMany,
     ManyToOne,
     PrimaryKey,
-    Property,
+    Property
 } from "@mikro-orm/core"
 import { GraphQLDate } from "graphql-scalars"
 import { Field, Int, ObjectType, registerEnumType } from "type-graphql"
@@ -53,16 +53,14 @@ export class Project {
 
     @ManyToMany(() => Skill, undefined, {
         owner: true,
-        pivotTable: "project_skill",
+        pivotTable: "project_skill"
     })
     @Field(() => [Skill])
     skills = new Collection<Skill>(this)
 }
 
 export enum ProjectIconType {
-    GITHUB = "github",
+    GITHUB = "github"
 }
 
-registerEnumType(ProjectIconType, {
-    name: "ProjectIconType",
-})
+registerEnumType(ProjectIconType, { name: "ProjectIconType" })

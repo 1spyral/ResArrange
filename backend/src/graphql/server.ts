@@ -11,13 +11,11 @@ const server = new ApolloServer<Context>({
     schema: await buildSchema({
         resolvers,
         authChecker,
-        emitSchemaFile: path.resolve(process.cwd(), "schema.graphql"),
-    }),
+        emitSchemaFile: path.resolve(process.cwd(), "schema.graphql")
+    })
 })
 
 await server.start()
 console.log("✅ Apollo Server started")
 
-export const apolloMiddleware = expressMiddleware(server, {
-    context,
-})
+export const apolloMiddleware = expressMiddleware(server, { context })

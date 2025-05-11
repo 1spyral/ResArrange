@@ -10,7 +10,7 @@ import {
     Info,
     Mutation,
     Query,
-    Resolver,
+    Resolver
 } from "type-graphql"
 
 @Resolver(User)
@@ -25,9 +25,7 @@ export class UserResolver {
 
         const populate = extractRelations(info)
 
-        const result = await em.findOne(User, id, {
-            populate,
-        })
+        const result = await em.findOne(User, id, { populate })
 
         return result!
     }
@@ -47,9 +45,7 @@ export class UserResolver {
 
         const populate = extractRelations(info)
 
-        const result = await em.findOne(User, id, {
-            populate,
-        })
+        const result = await em.findOne(User, id, { populate })
 
         em.assign(result!, input, { ignoreUndefined: true })
 

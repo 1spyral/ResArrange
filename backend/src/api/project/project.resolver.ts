@@ -1,6 +1,5 @@
-import { Project } from "@/api/project/project.entity"
 import { checkNotNull, checkNotNullOrEmpty } from "@/helpers/validateInput"
-import { CreateProjectInput, UpdateProjectInput } from "."
+import { Project, CreateProjectInput, UpdateProjectInput } from "."
 import { Skill } from "@/api/skill"
 import { User } from "@/api/user"
 import { Context } from "@/graphql/context"
@@ -13,7 +12,7 @@ import {
     Info,
     Mutation,
     Query,
-    Resolver,
+    Resolver
 } from "type-graphql"
 
 @Resolver(Project)
@@ -30,9 +29,7 @@ export class ProjectResolver {
         return await em.findOne(
             Project,
             { id, user: em.getReference(User, user!.id) },
-            {
-                populate,
-            }
+            { populate }
         )
     }
 
@@ -63,7 +60,7 @@ export class ProjectResolver {
         const project = em.create(Project, {
             ...input,
             user: em.getReference(User, user!.id),
-            skills: input.skillIds.map(id => em.getReference(Skill, id)),
+            skills: input.skillIds.map(id => em.getReference(Skill, id))
         })
 
         await em.flush()
@@ -114,11 +111,9 @@ export class ProjectResolver {
                 skills: input.skillIds
                     ? input.skillIds.map(id => em.getReference(Skill, id))
                     : undefined,
-                skillIds: undefined,
+                skillIds: undefined
             },
-            {
-                ignoreUndefined: true,
-            }
+            { ignoreUndefined: true }
         )
 
         await em.flush()

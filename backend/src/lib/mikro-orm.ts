@@ -4,7 +4,7 @@ import {
     DB_PASSWORD,
     DB_PORT,
     DB_USERNAME,
-    NODE_ENV,
+    NODE_ENV
 } from "@/config"
 import { MikroORM } from "@mikro-orm/postgresql"
 import * as fs from "node:fs"
@@ -16,7 +16,7 @@ const config = {
     port: DB_PORT,
     user: DB_USERNAME,
     password: DB_PASSWORD,
-    dbName: DB_NAME,
+    dbName: DB_NAME
 }
 
 export const orm = await MikroORM.init(config)

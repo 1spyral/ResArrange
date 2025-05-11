@@ -22,5 +22,5 @@ export class Auth {
 export enum ProviderType {
     PASSWORD = "password",
     GOOGLE = "google",
-    GITHUB = "github",
+    GITHUB = "github"
 }

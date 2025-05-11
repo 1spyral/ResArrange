@@ -25,7 +25,7 @@ await build({
         "mysql2",
         "oracledb",
         "pg-query-stream",
-        "sqlite3",
+        "sqlite3"
     ],
-    format: "esm",
+    format: "esm"
 })

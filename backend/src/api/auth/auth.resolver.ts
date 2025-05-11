@@ -10,7 +10,7 @@ import validator from "validator"
 @Resolver(Auth)
 export class AuthResolver {
     @Mutation(() => String, {
-        description: "Returns a JWT token of the created user's session",
+        description: "Returns a JWT token of the created user's session"
     })
     async signup(
         @Ctx() { em }: Context,
@@ -32,9 +32,7 @@ export class AuthResolver {
         }
 
         // Create new user
-        const user = em.create(User, {
-            email: username,
-        })
+        const user = em.create(User, { email: username })
 
         await em.flush()
 
@@ -46,22 +44,16 @@ export class AuthResolver {
             user: user.id,
             provider: ProviderType.PASSWORD,
             username,
-            password,
+            password
         })
 
         await em.flush()
 
-        return jwt.sign(
-            {
-                id: auth.user.id,
-            },
-            JWT_SECRET,
-            { expiresIn: "12h" }
-        )
+        return jwt.sign({ id: auth.user.id }, JWT_SECRET, { expiresIn: "12h" })
     }
 
     @Mutation(() => String, {
-        description: "Returns a JWT token of the logged in user",
+        description: "Returns a JWT token of the logged in user"
     })
     async login(
         @Ctx() { em }: Context,
@@ -91,12 +83,6 @@ export class AuthResolver {
             throw new Error("Invalid password")
         }
 
-        return jwt.sign(
-            {
-                id: auth.user.id,
-            },
-            JWT_SECRET,
-            { expiresIn: "12h" }
-        )
+        return jwt.sign({ id: auth.user.id }, JWT_SECRET, { expiresIn: "12h" })
     }
 }

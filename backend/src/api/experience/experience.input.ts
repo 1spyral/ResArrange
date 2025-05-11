@@ -58,7 +58,7 @@ export class UpdateExperienceInput implements Partial<Experience> {
 
     @Field(() => [GraphQLInt], {
         description: "Array of skill IDs",
-        nullable: true,
+        nullable: true
     })
     skillIds?: number[]
 }

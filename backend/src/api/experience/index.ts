@@ -2,5 +2,5 @@ export { Experience } from "./experience.entity"
 export { ExperienceResolver } from "./experience.resolver"
 export {
     CreateExperienceInput,
-    UpdateExperienceInput,
+    UpdateExperienceInput
 } from "./experience.input"

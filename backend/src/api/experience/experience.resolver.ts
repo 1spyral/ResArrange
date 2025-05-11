@@ -1,12 +1,10 @@
-import { Project } from "@/api/project"
 import { checkNotNull, checkNotNullOrEmpty } from "@/helpers/validateInput"
-import { CreateExperienceInput, UpdateExperienceInput } from "."
 import { Skill } from "@/api/skill"
 import { User } from "@/api/user"
 import { Context } from "@/graphql/context"
 import { extractRelations } from "@/helpers/extractRelations"
 import { GraphQLInt, GraphQLResolveInfo } from "graphql"
-import { Experience } from "."
+import { Experience, CreateExperienceInput, UpdateExperienceInput } from "."
 import {
     Arg,
     Authorized,
@@ -14,7 +12,7 @@ import {
     Info,
     Mutation,
     Query,
-    Resolver,
+    Resolver
 } from "type-graphql"
 
 @Resolver(Experience)
@@ -31,9 +29,7 @@ export class ExperienceResolver {
         return await em.findOne(
             Experience,
             { id, user: em.getReference(User, user!.id) },
-            {
-                populate,
-            }
+            { populate }
         )
     }
 
@@ -64,7 +60,7 @@ export class ExperienceResolver {
         const experience = em.create(Experience, {
             ...input,
             user: em.getReference(User, user!.id),
-            skills: input.skillIds.map(id => em.getReference(Skill, id)),
+            skills: input.skillIds.map(id => em.getReference(Skill, id))
         })
 
         await em.flush()
@@ -123,11 +119,9 @@ export class ExperienceResolver {
                 skills: input.skillIds
                     ? input.skillIds.map(id => em.getReference(Skill, id))
                     : undefined,
-                skillIds: undefined,
+                skillIds: undefined
             },
-            {
-                ignoreUndefined: true,
-            }
+            { ignoreUndefined: true }
         )
 
         await em.flush()

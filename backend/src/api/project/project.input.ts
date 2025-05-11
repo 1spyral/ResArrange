@@ -52,7 +52,7 @@ export class UpdateProjectInput implements Partial<Project> {
 
     @Field(() => [GraphQLInt], {
         description: "Array of skill IDs",
-        nullable: true,
+        nullable: true
     })
     skillIds?: number[]
 }

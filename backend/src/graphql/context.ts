@@ -9,8 +9,5 @@ export interface Context {
 }
 
 export async function context({ req }: { req: Request }) {
-    return {
-        user: req.user,
-        em: orm.em.fork(),
-    }
+    return { user: req.user, em: orm.em.fork() }
 }
