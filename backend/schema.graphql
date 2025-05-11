@@ -78,6 +78,7 @@ type Mutation {
   createEducation(input: CreateEducationInput!): Education!
   createExperience(input: CreateExperienceInput!): Experience!
   createProject(input: CreateProjectInput!): Project!
+  createSkill(name: String!): Skill!
   deleteEducation(id: Int!): Boolean!
   deleteExperience(id: Int!): Boolean!
   deleteProject(id: Int!): Boolean!
@@ -111,12 +112,14 @@ enum ProjectIconType {
 }
 
 type Query {
+  autocompleteSkills(query: String!): [Skill!]!
   education(id: Int!): Education
   educations: [Education!]!
   experience(id: Int!): Experience
   experiences: [Experience!]!
   project(id: Int!): Project
   projects: [Project!]!
+  skill(id: Int!): Skill
   user: User!
 }
 

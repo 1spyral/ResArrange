@@ -25,11 +25,7 @@ export class ProjectResolver {
     ): Promise<Project | null> {
         const populate = extractRelations(info)
 
-        return await em.findOne(
-            Project,
-            { id, user: user!.id },
-            { populate }
-        )
+        return await em.findOne(Project, { id, user: user!.id }, { populate })
     }
 
     @Authorized()
@@ -40,11 +36,7 @@ export class ProjectResolver {
     ): Promise<Project[]> {
         const populate = extractRelations(info)
 
-        return await em.find(
-            Project,
-            { user: user!.id },
-            { populate }
-        )
+        return await em.find(Project, { user: user!.id }, { populate })
     }
 
     @Authorized()

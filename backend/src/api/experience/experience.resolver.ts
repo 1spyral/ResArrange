@@ -40,11 +40,7 @@ export class ExperienceResolver {
     ): Promise<Experience[]> {
         const populate = extractRelations(info)
 
-        return await em.find(
-            Experience,
-            { user: user!.id },
-            { populate }
-        )
+        return await em.find(Experience, { user: user!.id }, { populate })
     }
 
     @Authorized()

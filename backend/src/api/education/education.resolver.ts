@@ -25,11 +25,7 @@ export class EducationResolver {
     ): Promise<Education | null> {
         const populate = extractRelations(info)
 
-        return await em.findOne(
-            Education,
-            { id, user: user!.id },
-            { populate }
-        )
+        return await em.findOne(Education, { id, user: user!.id }, { populate })
     }
 
     @Authorized()
@@ -40,11 +36,7 @@ export class EducationResolver {
     ): Promise<Education[]> {
         const populate = extractRelations(info)
 
-        return await em.find(
-            Education,
-            { user: user!.id },
-            { populate }
-        )
+        return await em.find(Education, { user: user!.id }, { populate })
     }
 
     @Authorized()
