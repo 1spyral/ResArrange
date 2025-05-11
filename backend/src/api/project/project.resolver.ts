@@ -84,11 +84,10 @@ export class ProjectResolver {
 
         const populate = extractRelations(info)
 
-        const project = await em.findOneOrFail(
-            Project,
-            { id: input.id, user: user!.id },
-            { populate }
-        )
+        const project = await em.findOneOrFail(Project, {
+            id: input.id,
+            user: user!.id
+        })
 
         em.assign(
             project,
@@ -113,6 +112,8 @@ export class ProjectResolver {
         project.endDate = project.endDate
             ? new Date(project.endDate)
             : undefined
+
+        await em.populate(project, populate)
 
         return project
     }

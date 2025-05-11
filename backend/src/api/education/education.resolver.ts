@@ -96,11 +96,10 @@ export class EducationResolver {
 
         const populate = extractRelations(info)
 
-        const education = await em.findOneOrFail(
-            Education,
-            { id: input.id, user: user!.id },
-            { populate }
-        )
+        const education = await em.findOneOrFail(Education, {
+            id: input.id,
+            user: user!.id
+        })
 
         em.assign(
             education,
@@ -125,6 +124,8 @@ export class EducationResolver {
         education.endDate = education.endDate
             ? new Date(education.endDate)
             : undefined
+
+        await em.populate(education, populate)
 
         return education
     }

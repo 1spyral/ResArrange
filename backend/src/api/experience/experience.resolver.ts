@@ -96,11 +96,10 @@ export class ExperienceResolver {
 
         const populate = extractRelations(info)
 
-        const experience = await em.findOneOrFail(
-            Experience,
-            { id: input.id, user: user!.id },
-            { populate }
-        )
+        const experience = await em.findOneOrFail(Experience, {
+            id: input.id,
+            user: user!.id
+        })
 
         em.assign(
             experience,
@@ -125,6 +124,8 @@ export class ExperienceResolver {
         experience.endDate = experience.endDate
             ? new Date(experience.endDate)
             : undefined
+
+        await em.populate(experience, populate)
 
         return experience
     }
