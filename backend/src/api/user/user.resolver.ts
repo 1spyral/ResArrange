@@ -1,3 +1,5 @@
+import { Skill } from "@/api/skill"
+import { checkNotNullOrEmpty } from "@/helpers/validateInput"
 import { User } from "."
 import { UpdateUserInput } from "@/api/user/user.input"
 import { Context } from "@/graphql/context"
@@ -37,20 +39,31 @@ export class UserResolver {
         @Ctx() { user, em }: Context,
         @Arg("input", () => UpdateUserInput) input: UpdateUserInput
     ): Promise<User> {
-        if (input.name === null || !input.name?.trim()) {
-            throw Error("Name cannot be null or empty, omit field instead")
-        }
+        checkNotNullOrEmpty(
+            input.name,
+            "Name cannot be null or empty, omit field instead"
+        )
 
         const id = user!.id
 
         const populate = extractRelations(info)
 
-        const result = await em.findOne(User, id, { populate })
+        const result = (await em.findOne(User, id, { populate }))!
 
-        em.assign(result!, input, { ignoreUndefined: true })
+        em.assign(
+            result,
+            {
+                ...input,
+                skills: input.skillIds?.map(id => em.getReference(Skill, id)),
+                skillIds: undefined
+            },
+            { ignoreUndefined: true }
+        )
 
         await em.flush()
 
-        return result!
+        await em.populate(result, populate)
+
+        return result
     }
 }

@@ -1,3 +1,4 @@
+import { GraphQLInt } from "graphql"
 import { User } from "."
 import { Field, InputType } from "type-graphql"
 
@@ -20,4 +21,7 @@ export class UpdateUserInput implements Partial<User> {
 
     @Field(() => String, { nullable: true })
     location?: string
+
+    @Field(() => [GraphQLInt], { nullable: true })
+    skillIds?: number[]
 }

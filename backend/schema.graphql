@@ -4,42 +4,48 @@
 # -----------------------------------------------
 
 input CreateEducationInput {
-  courses: [String!]!
-  degree: String!
-  description: String
-  endDate: Date
-  institution: String!
-  location: String!
-  points: [String!]!
+    courses: [String!]!
+    degree: String!
+    description: String
+    endDate: Date
+    institution: String!
+    location: String!
+    points: [String!]!
 
-  """Array of skill IDs"""
-  skillIds: [Int!]!
-  startDate: Date!
+    """
+    Array of skill IDs
+    """
+    skillIds: [Int!]!
+    startDate: Date!
 }
 
 input CreateExperienceInput {
-  company: String!
-  description: String
-  endDate: Date
-  location: String!
-  points: [String!]!
+    company: String!
+    description: String
+    endDate: Date
+    location: String!
+    points: [String!]!
 
-  """Array of skill IDs"""
-  skillIds: [Int!]!
-  startDate: Date!
-  title: String!
+    """
+    Array of skill IDs
+    """
+    skillIds: [Int!]!
+    startDate: Date!
+    title: String!
 }
 
 input CreateProjectInput {
-  description: String
-  endDate: Date
-  points: [String!]!
+    description: String
+    endDate: Date
+    points: [String!]!
 
-  """Array of skill IDs"""
-  skillIds: [Int!]!
-  startDate: Date!
-  title: String!
-  website: String
+    """
+    Array of skill IDs
+    """
+    skillIds: [Int!]!
+    startDate: Date!
+    title: String!
+    website: String
 }
 
 """
@@ -48,148 +54,159 @@ A date string, such as 2007-12-03, compliant with the `full-date` format outline
 scalar Date
 
 type Education {
-  courses: [String!]!
-  degree: String!
-  description: String
-  endDate: Date
-  id: Int!
-  institution: String!
-  location: String!
-  points: [String!]!
-  skills: [Skill!]!
-  startDate: Date!
-  user: User!
+    courses: [String!]!
+    degree: String!
+    description: String
+    endDate: Date
+    id: Int!
+    institution: String!
+    location: String!
+    points: [String!]!
+    skills: [Skill!]!
+    startDate: Date!
+    user: User!
 }
 
 type Experience {
-  company: String!
-  description: String
-  endDate: Date
-  id: Int!
-  location: String!
-  points: [String!]!
-  skills: [Skill!]!
-  startDate: Date!
-  title: String!
-  user: User!
+    company: String!
+    description: String
+    endDate: Date
+    id: Int!
+    location: String!
+    points: [String!]!
+    skills: [Skill!]!
+    startDate: Date!
+    title: String!
+    user: User!
 }
 
 type Mutation {
-  createEducation(input: CreateEducationInput!): Education!
-  createExperience(input: CreateExperienceInput!): Experience!
-  createProject(input: CreateProjectInput!): Project!
-  createSkill(name: String!): Skill!
-  deleteEducation(id: Int!): Boolean!
-  deleteExperience(id: Int!): Boolean!
-  deleteProject(id: Int!): Boolean!
+    createEducation(input: CreateEducationInput!): Education!
+    createExperience(input: CreateExperienceInput!): Experience!
+    createProject(input: CreateProjectInput!): Project!
+    createSkill(name: String!): Skill!
+    deleteEducation(id: Int!): Boolean!
+    deleteExperience(id: Int!): Boolean!
+    deleteProject(id: Int!): Boolean!
 
-  """Returns a JWT token of the logged in user"""
-  login(password: String!, username: String!): String!
+    """
+    Returns a JWT token of the logged in user
+    """
+    login(password: String!, username: String!): String!
 
-  """Returns a JWT token of the created user's session"""
-  signup(password: String!, username: String!): String!
-  updateEducation(input: UpdateEducationInput!): Education!
-  updateExperience(input: UpdateExperienceInput!): Experience!
-  updateProject(input: UpdateProjectInput!): Project!
-  updateUser(input: UpdateUserInput!): User!
+    """
+    Returns a JWT token of the created user's session
+    """
+    signup(password: String!, username: String!): String!
+    updateEducation(input: UpdateEducationInput!): Education!
+    updateExperience(input: UpdateExperienceInput!): Experience!
+    updateProject(input: UpdateProjectInput!): Project!
+    updateUser(input: UpdateUserInput!): User!
 }
 
 type Project {
-  description: String
-  endDate: Date
-  icon: ProjectIconType
-  id: Int!
-  points: [String!]!
-  skills: [Skill!]!
-  startDate: Date!
-  title: String!
-  user: User!
-  website: String
+    description: String
+    endDate: Date
+    icon: ProjectIconType
+    id: Int!
+    points: [String!]!
+    skills: [Skill!]!
+    startDate: Date!
+    title: String!
+    user: User!
+    website: String
 }
 
 enum ProjectIconType {
-  GITHUB
+    GITHUB
 }
 
 type Query {
-  autocompleteSkills(query: String!): [Skill!]!
-  education(id: Int!): Education
-  educations: [Education!]!
-  experience(id: Int!): Experience
-  experiences: [Experience!]!
-  project(id: Int!): Project
-  projects: [Project!]!
-  skill(id: Int!): Skill
-  user: User!
+    autocompleteSkills(query: String!): [Skill!]!
+    education(id: Int!): Education
+    educations: [Education!]!
+    experience(id: Int!): Experience
+    experiences: [Experience!]!
+    project(id: Int!): Project
+    projects: [Project!]!
+    skill(id: Int!): Skill
+    user: User!
 }
 
 type Skill {
-  id: Int!
-  name: String!
+    id: Int!
+    name: String!
 }
 
 input UpdateEducationInput {
-  courses: [String!]
-  degree: String
-  description: String
-  endDate: Date
-  id: Int!
-  institution: String
-  location: String
-  points: [String!]
+    courses: [String!]
+    degree: String
+    description: String
+    endDate: Date
+    id: Int!
+    institution: String
+    location: String
+    points: [String!]
 
-  """Array of skill IDs"""
-  skillIds: [Int!]
-  startDate: Date
+    """
+    Array of skill IDs
+    """
+    skillIds: [Int!]
+    startDate: Date
 }
 
 input UpdateExperienceInput {
-  company: String
-  description: String
-  endDate: Date
-  id: Int!
-  location: String
-  points: [String!]
+    company: String
+    description: String
+    endDate: Date
+    id: Int!
+    location: String
+    points: [String!]
 
-  """Array of skill IDs"""
-  skillIds: [Int!]
-  startDate: Date
-  title: String
+    """
+    Array of skill IDs
+    """
+    skillIds: [Int!]
+    startDate: Date
+    title: String
 }
 
 input UpdateProjectInput {
-  description: String
-  endDate: Date
-  id: Int!
-  points: [String!]
+    description: String
+    endDate: Date
+    id: Int!
+    points: [String!]
 
-  """Array of skill IDs"""
-  skillIds: [Int!]
-  startDate: Date
-  title: String
-  website: String
+    """
+    Array of skill IDs
+    """
+    skillIds: [Int!]
+    startDate: Date
+    title: String
+    website: String
 }
 
 input UpdateUserInput {
-  github: String
-  linkedin: String
-  location: String
-  name: String
-  phone: String
-  website: String
+    github: String
+    linkedin: String
+    location: String
+    name: String
+    phone: String
+    skillIds: [Int!]
+    website: String
 }
 
 type User {
-  educations: [Education!]!
-  email: String
-  experiences: [Experience!]!
-  github: String
-  id: Int!
-  linkedin: String
-  location: String
-  name: String
-  phone: String
-  projects: [Project!]!
-  skills: [Skill!]!
-  website: String
+    educations: [Education!]!
+    email: String
+    experiences: [Experience!]!
+    github: String
+    id: Int!
+    linkedin: String
+    location: String
+    name: String
+    phone: String
+    projects: [Project!]!
+    skills: [Skill!]!
+    website: String
 }
