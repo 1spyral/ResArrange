@@ -12,6 +12,6 @@
 
 @layer base {
     body {
-        @apply font-sans text-text-color;
+        @apply text-text-color font-sans;
     }
 }

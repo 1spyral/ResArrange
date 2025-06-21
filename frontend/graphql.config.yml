@@ -1,0 +1,6 @@
+schema: schema.graphql
+documents: "**/*.graphql"
+extensions:
+    endpoints:
+        default:
+            url: ${VITE_GRAPHQL_API_URL}

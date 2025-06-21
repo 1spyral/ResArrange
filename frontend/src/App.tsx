@@ -1,14 +1,14 @@
 import LandingPage from "@/components/LandingPage.tsx"
-import { useLandingPageStore } from "@/stores"
+import { useAuthStore } from "@/stores"
 import MainPage from "@/components/MainPage.tsx"
 
 export default function App() {
-    const { hasExited } = useLandingPageStore()
+    const { isLoggedIn } = useAuthStore()
 
     return (
         <div className="font-[Arial,_sans-serif]">
-            {!hasExited && <LandingPage />}
-            {hasExited && <MainPage />}
+            {!isLoggedIn && <LandingPage />}
+            {isLoggedIn && <MainPage />}
         </div>
     )
 }

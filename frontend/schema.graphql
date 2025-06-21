@@ -1,0 +1,191 @@
+# This file was generated. Do not edit manually.
+
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+"Indicates exactly one field must be supplied and this field must not be `null`."
+directive @oneOf on INPUT_OBJECT
+
+type Education {
+    courses: [String!]!
+    degree: String!
+    description: String
+    endDate: Date
+    id: Int!
+    institution: String!
+    location: String!
+    points: [String!]!
+    skills: [Skill!]!
+    startDate: Date!
+    user: User!
+}
+
+type Experience {
+    company: String!
+    description: String
+    endDate: Date
+    id: Int!
+    location: String!
+    points: [String!]!
+    skills: [Skill!]!
+    startDate: Date!
+    title: String!
+    user: User!
+}
+
+type Mutation {
+    createEducation(input: CreateEducationInput!): Education!
+    createExperience(input: CreateExperienceInput!): Experience!
+    createProject(input: CreateProjectInput!): Project!
+    createSkill(name: String!): Skill!
+    deleteEducation(id: Int!): Boolean!
+    deleteExperience(id: Int!): Boolean!
+    deleteProject(id: Int!): Boolean!
+    "Returns a JWT token of the logged in user"
+    login(password: String!, username: String!): String!
+    "Returns a JWT token of the created user's session"
+    signup(password: String!, username: String!): String!
+    updateEducation(input: UpdateEducationInput!): Education!
+    updateExperience(input: UpdateExperienceInput!): Experience!
+    updateProject(input: UpdateProjectInput!): Project!
+    updateUser(input: UpdateUserInput!): User!
+}
+
+type Project {
+    description: String
+    endDate: Date
+    icon: ProjectIconType
+    id: Int!
+    points: [String!]!
+    skills: [Skill!]!
+    startDate: Date!
+    title: String!
+    user: User!
+    website: String
+}
+
+type Query {
+    autocompleteSkills(query: String!): [Skill!]!
+    education(id: Int!): Education
+    educations: [Education!]!
+    experience(id: Int!): Experience
+    experiences: [Experience!]!
+    project(id: Int!): Project
+    projects: [Project!]!
+    skill(id: Int!): Skill
+    user: User!
+}
+
+type Skill {
+    id: Int!
+    name: String!
+}
+
+type User {
+    educations: [Education!]!
+    email: String
+    experiences: [Experience!]!
+    github: String
+    id: Int!
+    linkedin: String
+    location: String
+    name: String
+    phone: String
+    projects: [Project!]!
+    skills: [Skill!]!
+    website: String
+}
+
+enum ProjectIconType {
+    GITHUB
+}
+
+"A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar."
+scalar Date
+
+input CreateEducationInput {
+    courses: [String!]!
+    degree: String!
+    description: String
+    endDate: Date
+    institution: String!
+    location: String!
+    points: [String!]!
+    "Array of skill IDs"
+    skillIds: [Int!]!
+    startDate: Date!
+}
+
+input CreateExperienceInput {
+    company: String!
+    description: String
+    endDate: Date
+    location: String!
+    points: [String!]!
+    "Array of skill IDs"
+    skillIds: [Int!]!
+    startDate: Date!
+    title: String!
+}
+
+input CreateProjectInput {
+    description: String
+    endDate: Date
+    points: [String!]!
+    "Array of skill IDs"
+    skillIds: [Int!]!
+    startDate: Date!
+    title: String!
+    website: String
+}
+
+input UpdateEducationInput {
+    courses: [String!]
+    degree: String
+    description: String
+    endDate: Date
+    id: Int!
+    institution: String
+    location: String
+    points: [String!]
+    "Array of skill IDs"
+    skillIds: [Int!]
+    startDate: Date
+}
+
+input UpdateExperienceInput {
+    company: String
+    description: String
+    endDate: Date
+    id: Int!
+    location: String
+    points: [String!]
+    "Array of skill IDs"
+    skillIds: [Int!]
+    startDate: Date
+    title: String
+}
+
+input UpdateProjectInput {
+    description: String
+    endDate: Date
+    id: Int!
+    points: [String!]
+    "Array of skill IDs"
+    skillIds: [Int!]
+    startDate: Date
+    title: String
+    website: String
+}
+
+input UpdateUserInput {
+    github: String
+    linkedin: String
+    location: String
+    name: String
+    phone: String
+    skillIds: [Int!]
+    website: String
+}
